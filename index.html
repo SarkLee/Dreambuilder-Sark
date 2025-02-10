@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>速成的正义</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+    .scene {
+      margin-bottom: 20px;
+    }
+    .options button {
+      display: block;
+      margin: 10px 0;
+      padding: 10px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .hidden {
+      display: none;
+    }
+    .highlight {
+      background-color: yellow;
+    }
+  </style>
+</head>
+<body>
+  <h1>速成的正义</h1>
+  <div id="game-container">
+    <div class="scene" id="prologue">
+      <h2>第一幕：无声的起诉</h2>
+      <p>K先生被清晨的敲门声惊醒，门外是一个穿着制服的年轻执法员，他递上一块黑色玻璃板，上面滚动着几行字：</p>
+      <blockquote>
+        “尊敬的市民K先生，您已被正式起诉。请于10分钟内在本设备上提交答辩声明，否则系统将默认您认罪。”
+      </blockquote>
+      <p>屏幕上只有两个选项：</p>
+      <div class="options">
+        <button onclick="chooseOption('admit_guilt')">承认罪行</button>
+        <button onclick="chooseOption('appeal')">申诉</button>
+      </div>
+    </div>
+
+    <!-- 主线选择：承认罪行 -->
+    <div class="scene hidden" id="admit_guilt_path">
+      <h2>支线1：顺从接受</h2>
+      <p>系统自动判定罪名成立，跳出三种量刑方案：</p>
+      <div class="options">
+        <button onclick="chooseOption('community_service')">社区服务十小时</button>
+        <button onclick="chooseOption('fine_500')">罚款500元</button>
+        <button onclick="chooseOption('mind_reconstruction')">精神重构训练</button>
+      </div>
+    </div>
+
+    <!-- 社区服务路线 -->
+    <div class="scene hidden" id="community_service">
+      <h2>A线：劳役改造</h2>
+      <p>K先生被派往“社会优化中心”执行劳役。</p>
+      <p>他需要在工厂、清扫队、数据中心等场所服役，接触到其他被判刑的市民。</p>
+      <p>期间，K先生发现“劳役系统”暗藏黑幕，某些人被永久劳动，并且在算法上被剥夺自由。</p>
+      <div class="options">
+        <button onclick="chooseOption('expose_truth')">尝试揭露真相（可能触发叛逃路线）</button>
+        <button onclick="chooseOption('complete_tasks')">默默完成任务，减少惩罚时间（顺从路线）</button>
+        <button onclick="chooseOption('cooperate_escape')">与同事合作，寻找漏洞逃脱（逃亡路线）</button>
+        <button onclick="chooseOption('join_uprising')">秘密加入地下劳工组织，策划暴动（进入【暴动结局】）</button>
+      </div>
+    </div>
+
+    <!-- 罚款路线 -->
+    <div class="scene hidden" id="fine_500">
+      <h2>B线：经济剥削</h2>
+      <p>K先生支付罚款，但发现自己的信用评分下降，导致：</p>
+      <ul>
+        <li>被公司辞退</li>
+        <li>贷款利率上升</li>
+        <li>消费权限受限</li>
+      </ul>
+      <p>由于信用受损，K先生被迫加入“社会重塑计划”，进入低级工作岗位。</p>
+      <div class="options">
+        <button onclick="chooseOption('accept_new_identity')">接受新身份，努力重建生活（隐忍生存路线）</button>
+        <button onclick="chooseOption('hack_credit_system')">试图破解信用系统，恢复原有身份（黑客路线）</button>
+        <button onclick="chooseOption('illegal_trade')">寻找非法渠道交易信用分（地下交易路线）</button>
+        <button onclick="chooseOption('collective_lawsuit')">联合其他信用受害者，发动集体诉讼（进入【法律抗争】路线）</button>
+      </div>
+    </div>
+
+    <!-- 意识改造路线 -->
+    <div class="scene hidden" id="mind_reconstruction">
+      <h2>C线：意识改造</h2>
+      <p>K先生被送入“司法体验中心”，强制进行意识改造。</p>
+      <p>期间，他被注射神经抑制剂，并接受强制思想训练。</p>
+      <div class="options">
+        <button onclick="chooseOption('comply_with_reconstruction')">配合改造，最终成为“理想公民”（完全洗脑结局）</button>
+        <button onclick="chooseOption('resist_transformation')">试图抵抗，但受限于药物</button>
+        <button onclick="chooseOption('escape_confinement')">与其他囚犯合作，试图逃离</button>
+        <button onclick="chooseOption('fool_system')">欺骗系统，让其误判自己已改造成功（进入【伪装自由】结局）</button>
+      </div>
+    </div>
+
+    <!-- 主线选择：申诉 -->
+    <div class="scene hidden" id="appeal_path">
+      <h2>支线2：尝试申诉</h2>
+      <p>系统显示“审理时间：3分27秒”。屏幕变红，K先生被拉入虚拟法庭，面对一名法官、一个检察官和一个心不在焉的辩护律师。</p>
+      <p>罪名：“凝视街灯超过三十秒，未进行任何合法交互行为”。</p>
+      <p>K先生提出抗议，但法官警告：“抗议无效，本庭仅基于数据和算法判断，您的主观意图无关紧要。”</p>
+      <div class="options">
+        <button onclick="chooseOption('argue_case')">反驳：我只是发呆而已（无效，系统自动忽略）</button>
+        <button onclick="chooseOption('request_defense')">请求律师辩护</button>
+        <button onclick="chooseOption('remain_silent')">保持沉默（系统自动默认承认罪行）</button>
+        <button onclick="chooseOption('hack_judgment_system')">试图破解审判系统（进入隐藏【黑客干预】支线）</button>
+      </div>
+    </div>
+
+    <!-- 隐藏支线：黑客干预 -->
+    <div class="scene hidden" id="hack_judgment_system">
+      <h2>隐藏支线剧情：黑客干预</h2>
+      <p>K先生试图破解审判系统以逃避判决。</p>
+      <div class="options">
+        <button onclick="chooseOption('successful_hack')">成功篡改系统数据</button>
+        <button onclick="chooseOption('failed_hack')">未能破解系统</button>
+      </div>
+    </div>
+
+    <!-- 成功篡改系统数据 -->
+    <div class="scene hidden" id="successful_hack">
+      <h2>黑客胜利结局</h2>
+      <p>K先生成功篡改司法数据库，抹除所有犯罪记录。</p>
+      <div class="options">
+        <button onclick="restartGame()">重新开始游戏</button>
+      </div>
+    </div>
+
+    <!-- 未能破解系统 -->
+    <div class="scene hidden" id="failed_hack">
+      <h2>返回申诉结果</h2>
+      <p>K先生未能破解系统，仍需面临量刑。</p>
+      <div class="options">
+        <button onclick="chooseOption('judge_result')">返回量刑结果</button>
+      </div>
+    </div>
+
+    <!-- 返回量刑结果 -->
+    <div class="scene hidden" id="judge_result">
+      <h2>申诉结果</h2>
+      <p>系统判定罪名成立，跳出三种量刑方案：</p>
+      <div class="options">
+        <button onclick="chooseOption('community_service')">社区服务十小时</button>
+        <button onclick="chooseOption('fine_500')">罚款500元</button>
+        <button onclick="chooseOption('mind_reconstruction')">精神重构训练</button>
+      </div>
+    </div>
+
+    <!-- 揭露真相 -->
+    <div class="scene hidden" id="expose_truth">
+      <h2>反抗与逃亡</h2>
+      <p>K先生尝试揭露真相，发现了劳役系统的黑幕。</p>
+      <div class="options">
+        <button onclick="chooseOption('start_revolution')">加入地下抵抗组织，推翻AI司法系统（革命结局）</button>
+        <button onclick="chooseOption('flee_to_wilderness')">逃亡至系统无法掌控的荒野区域（流亡者结局）</button>
+      </div>
+    </div>
+
+    <!-- 默默完成任务 -->
+    <div class="scene hidden" id="complete_tasks">
+      <h2>完美顺从结局</h2>
+      <p>K先生完全接受社会规训，成为标准化公民。</p>
+      <div class="options">
+        <button onclick="restartGame()">重新开始游戏</button>
+      </div>
+    </div>
+
+    <!-- 与同事合作 -->
+    <div class="scene hidden" id="cooperate_escape">
+      <h2>流亡者结局</h2>
+      <p>K先生逃离城市，成为自由但孤独的荒野幸存者。</p>
+      <div class="options">
+        <button onclick="restartGame()">重新开始游戏</button>
+      </div>
+    </div>
+
+    <!-- 秘密加入地下劳工组织 -->
+    <div class="scene hidden" id="join_uprising">
+      <h2>革命领袖结局</h2>
+      <p>K先生联合反抗组织，成功摧毁AI司法系统。</p>
+      <div class="options">
+        <button onclick="restartGame()">重新开始游戏</button>
+      </div>
+    </div>
+
+    <!-- 接受新身份 -->
+    <div class="scene hidden" id="accept_new_identity">
+      <h2>资本奴隶结局</h2>
+      <p>K先生在社会底层挣扎，终生受制于信用系统。</p>
+      <div class="options">
+        <button onclick="restartGame()">重新开始游戏</button>
+      </div>
+    </div>
+
+    <!-- 试图破解信用系统 -->
+    <div class="scene hidden" id="hack_credit_system">
+      <h2>潜伏者结局</h2>
+      <p>K先生成为体制内的卧底，慢慢瓦解系统。</p>
+      <div class="options">
+        <button onclick="restartGame()">重新开始游戏</button>
+      </div>
+    </div>
+
+    <!-- 寻找非法渠道交易信用分 -->
+    <div class="scene hidden" id="illegal_trade">
+      <h2>死亡结局</h2>
+      <p>K先生因参与非法活动被系统处决。</p>
+      <div class="options">
+        <button onclick="restartGame()">重新开始游戏</button>
+      </div>
+    </div>
+
+    <!-- 联合其他信用受害者 -->
+    <div class="scene hidden" id="collective_lawsuit">
+      <h2>法律抗争结局</h2>
+      <p>K先生通过司法手段挑战系统，改变规则。</p>
+      <div class="options">
+        <button onclick="restartGame()">重新开始游戏</button>
+      </div>
+    </div>
+
+    <!-- 配合改造 -->
+    <div class="scene hidden" id="comply_with_reconstruction">
+      <h2>精神湮灭结局</h2>
+      <p>经过重塑训练后，K先生失去自我意识。</p>
+      <div class="options">
+        <button onclick="restartGame()">重新开始游戏</button>
+      </div>
+    </div>
+
+    <!-- 试图抵抗 -->
+    <div class="scene hidden" id="resist_transformation">
+      <h2>死亡结局</h2>
+      <p>K先生反抗失败，被系统处决。</p>
+      <div class="options">
+        <button onclick="restartGame()">重新开始游戏</button>
+      </div>
+    </div>
+
+    <!-- 与其他囚犯合作 -->
+    <div class="scene hidden" id="escape_confinement">
+      <h2>流亡者结局</h2>
+      <p>K先生逃离城市，成为自由但孤独的荒野幸存者。</p>
+      <div class="options">
+        <button onclick="restartGame()">重新开始游戏</button>
+      </div>
+    </div>
+
+    <!-- 欺骗系统 -->
+    <div class="scene hidden" id="fool_system">
+      <h2>伪装自由结局</h2>
+      <p>K先生欺骗系统，表面上顺从，实际保持自由意志。</p>
+      <div class="options">
+        <button onclick="restartGame()">重新开始游戏</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let currentState = 'prologue';
+
+    function chooseOption(option) {
+      document.getElementById(currentState).classList.add('hidden');
+
+      switch (option) {
+        case 'admit_guilt':
+          currentState = 'admit_guilt_path';
+          break;
+        case 'appeal':
+          currentState = 'appeal_path';
+          break;
+        case 'community_service':
+          currentState = 'community_service';
+          break;
+        case 'fine_500':
+          currentState = 'fine_500';
+          break;
+        case 'mind_reconstruction':
+          currentState = 'mind_reconstruction';
+          break;
+        case 'argue_case':
+          currentState = 'judge_result'; // 无效，返回量刑结果
+          break;
+        case 'request_defense':
+          currentState = 'judge_result'; // 律师建议交罚款，返回量刑结果
+          break;
+        case 'remain_silent':
+          currentState = 'judge_result'; // 默认认罪，返回量刑结果
+          break;
+        case 'hack_judgment_system':
+          currentState = 'hack_judgment_system';
+          break;
+        case 'successful_hack':
+          currentState = 'successful_hack';
+          break;
+        case 'failed_hack':
+          currentState = 'failed_hack';
+          break;
+        case 'judge_result':
+          currentState = 'judge_result';
+          break;
+        case 'expose_truth':
+          currentState = 'expose_truth';
+          break;
+        case 'complete_tasks':
+          currentState = 'complete_tasks';
+          break;
+        case 'cooperate_escape':
+          currentState = 'cooperate_escape';
+          break;
+        case 'join_uprising':
+          currentState = 'join_uprising';
+          break;
+        case 'accept_new_identity':
+          currentState = 'accept_new_identity';
+          break;
+        case 'hack_credit_system':
+          currentState = 'hack_credit_system';
+          break;
+        case 'illegal_trade':
+          currentState = 'illegal_trade';
+          break;
+        case 'collective_lawsuit':
+          currentState = 'collective_lawsuit';
+          break;
+        case 'comply_with_reconstruction':
+          currentState = 'comply_with_reconstruction';
+          break;
+        case 'resist_transformation':
+          currentState = 'resist_transformation';
+          break;
+        case 'escape_confinement':
+          currentState = 'escape_confinement';
+          break;
+        case 'fool_system':
+          currentState = 'fool_system';
+          break;
+        case 'start_revolution':
+          currentState = 'join_uprising';
+          break;
+        case 'flee_to_wilderness':
+          currentState = 'cooperate_escape';
+          break;
+      }
+
+      document.getElementById(currentState).classList.remove('hidden');
+    }
+
+    function restartGame() {
+      currentState = 'prologue';
+      document.querySelectorAll('.scene').forEach(scene => scene.classList.add('hidden'));
+      document.getElementById(currentState).classList.remove('hidden');
+    }
+  </script>
+</body>
+</html>
+
+
+
